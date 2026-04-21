@@ -29,8 +29,12 @@ export function LoginPage() {
   const onSubmit = async (data: FormData) => {
     setError('');
     try {
-      await login(data.email, data.password);
-      navigate('/dashboard');
+      const result = await login(data.email, data.password);
+      if (result.mustChangePassword) {
+        navigate('/change-password');
+      } else {
+        navigate('/dashboard');
+      }
     } catch {
       setError('Invalid email or password');
     }
