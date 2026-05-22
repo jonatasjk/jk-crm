@@ -10,9 +10,9 @@ import {
 import { useState } from 'react';
 import { KanbanColumn } from './KanbanColumn';
 import { KanbanCard } from './KanbanCard';
-import type { Investor, Partner } from '@/types/models';
+import type { Investor, Partner, Customer } from '@/types/models';
 
-type Entity = Investor | Partner;
+type Entity = Investor | Partner | Customer;
 
 interface KanbanBoardProps {
   stages: string[];
@@ -20,7 +20,7 @@ interface KanbanBoardProps {
   items: Entity[];
   onStageChange: (id: string, newStage: string) => Promise<void>;
   onCardClick: (entity: Entity) => void;
-  entityType: 'investor' | 'partner';
+  entityType: 'investor' | 'partner' | 'customer';
 }
 
 export function KanbanBoard({

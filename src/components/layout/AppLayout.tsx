@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Users, Handshake, FileText, Mail, LogOut, BarChart3, Menu, X, Zap, KeyRound, UserCog } from 'lucide-react';
+import { Users, Handshake, ShoppingBag, FileText, Mail, LogOut, BarChart3, Menu, X, Zap, KeyRound, UserCog } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { to: '/dashboard', icon: BarChart3, label: 'Dashboard' },
   { to: '/investors', icon: Users, label: 'Investors' },
   { to: '/partners', icon: Handshake, label: 'Partners' },
+  { to: '/customers', icon: ShoppingBag, label: 'Customers' },
   { to: '/materials', icon: FileText, label: 'Materials' },
   { to: '/emails', icon: Mail, label: 'Emails' },
   { to: '/sequences', icon: Zap, label: 'Sequences' },

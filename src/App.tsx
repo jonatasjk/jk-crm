@@ -9,6 +9,7 @@ import { ChangePasswordPage } from '@/pages/ChangePasswordPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { InvestorsPage } from '@/pages/InvestorsPage';
 import { PartnersPage } from '@/pages/PartnersPage';
+import { CustomersPage } from '@/pages/CustomersPage';
 import { MaterialsPage } from '@/pages/MaterialsPage';
 import { EmailsPage } from '@/pages/EmailsPage';
 import { SequencesPage } from '@/pages/SequencesPage';
@@ -57,6 +58,7 @@ function AppRoutes() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/investors" element={<InvestorsPage />} />
                 <Route path="/partners" element={<PartnersPage />} />
+                <Route path="/customers" element={<CustomersPage />} />
                 <Route path="/materials" element={<MaterialsPage />} />
                 <Route path="/emails" element={<EmailsPage />} />
                 <Route path="/sequences" element={<SequencesPage />} />

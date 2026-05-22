@@ -2,6 +2,7 @@ import { http, HttpResponse } from 'msw';
 import {
   mockInvestors,
   mockPartners,
+  mockCustomers,
   mockEmailLogs,
   mockSequences,
   mockMaterials,
@@ -135,6 +136,47 @@ export const handlers = [
 
   http.post(`${BASE}/partners/import`, () =>
     HttpResponse.json({ created: 1, updated: 0, errors: [], parseErrors: [], total: 1 }),
+  ),
+
+  // ── Customers ─────────────────────────────────────────────────────────────
+  http.get(`${BASE}/customers`, ({ request }) => {
+    const url = new URL(request.url);
+    const stage = url.searchParams.get('stage');
+    const filtered = stage ? mockCustomers.filter((c) => c.stage === stage) : mockCustomers;
+    return HttpResponse.json({
+      data: filtered,
+      total: filtered.length,
+      page: 1,
+      limit: 200,
+      pages: filtered.length > 0 ? 1 : 0,
+    });
+  }),
+
+  http.get(`${BASE}/customers/:id`, ({ params }) => {
+    const customer = mockCustomers.find((c) => c.id === params.id) ?? mockCustomers[0];
+    return HttpResponse.json({ ...customer, emailLogs: [], activities: [] });
+  }),
+
+  http.post(`${BASE}/customers`, async ({ request }) => {
+    const body = (await request.json()) as Record<string, unknown>;
+    return HttpResponse.json(
+      { id: 'new-customer', tags: [], stage: 'LEAD', ...body },
+      { status: 201 },
+    );
+  }),
+
+  http.put(`${BASE}/customers/:id`, async ({ request, params }) => {
+    const body = (await request.json()) as Record<string, unknown>;
+    const customer = mockCustomers.find((c) => c.id === params.id) ?? mockCustomers[0];
+    return HttpResponse.json({ ...customer, ...body });
+  }),
+
+  http.delete(`${BASE}/customers/:id`, () =>
+    new HttpResponse(null, { status: 204 }),
+  ),
+
+  http.post(`${BASE}/customers/import`, () =>
+    HttpResponse.json({ created: 2, updated: 0, errors: [], parseErrors: [], total: 2 }),
   ),
 
   // ── Email ─────────────────────────────────────────────────────────────────
