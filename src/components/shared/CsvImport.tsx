@@ -7,7 +7,7 @@ import { Alert } from '@/components/ui/Alert';
 import type { ImportResult } from '@/types/models';
 
 interface CsvImportProps {
-  entityType: 'investor' | 'partner';
+  entityType: 'investor' | 'partner' | 'customer';
   onImport: (file: File) => Promise<ImportResult>;
   onSuccess: () => void;
   templateHeaders: string[];

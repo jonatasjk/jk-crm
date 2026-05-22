@@ -92,7 +92,7 @@ export function EmailsPage() {
                   className="hover:bg-gray-50 cursor-pointer transition-colors"
                   onClick={() =>
                     navigate(
-                      `/${log.entityType === 'INVESTOR' ? 'investors' : 'partners'}?highlight=${log.entityId}`,
+                      `/${log.entityType === 'INVESTOR' ? 'investors' : log.entityType === 'CUSTOMER' ? 'customers' : 'partners'}?highlight=${log.entityId}`,
                     )
                   }
                 >
@@ -106,8 +106,8 @@ export function EmailsPage() {
                     <p className="text-xs text-gray-400">{log.recipientEmail}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <Badge variant={log.entityType === 'INVESTOR' ? 'info' : 'purple'}>
-                      {log.entityType === 'INVESTOR' ? 'Investor' : 'Partner'}
+                    <Badge variant={log.entityType === 'INVESTOR' ? 'info' : log.entityType === 'CUSTOMER' ? 'success' : 'purple'}>
+                      {log.entityType === 'INVESTOR' ? 'Investor' : log.entityType === 'CUSTOMER' ? 'Customer' : 'Partner'}
                     </Badge>
                   </td>
                   <td className="px-4 py-3 max-w-xs">

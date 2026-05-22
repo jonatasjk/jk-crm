@@ -19,6 +19,7 @@ import {
 import { sequencesApi, type UpdateSequencePayload } from '@/api/sequences.api';
 import { investorsApi } from '@/api/investors.api';
 import { partnersApi } from '@/api/partners.api';
+import { customersApi } from '@/api/customers.api';
 import { materialsApi } from '@/api/materials.api';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
@@ -116,6 +117,9 @@ export function SequenceDetailPage() {
       if (seq?.entityType === 'INVESTOR') {
         return investorsApi.list(params).then((r) => r.data.data);
       }
+      if (seq?.entityType === 'CUSTOMER') {
+        return customersApi.list(params).then((r) => r.data.data);
+      }
       return partnersApi.list(params).then((r) => r.data.data);
     },
     enabled: enrollModal && !!seq,
@@ -157,7 +161,7 @@ export function SequenceDetailPage() {
       setEnrollError('');
       setEnrollSearch('');
       const { enrolled, skipped } = res.data;
-      setEnrollSuccess(`Enrolled ${enrolled} new ${seq?.entityType === 'INVESTOR' ? 'investor' : 'partner'}(s). ${skipped} already enrolled.`);
+      setEnrollSuccess(`Enrolled ${enrolled} new ${seq?.entityType === 'INVESTOR' ? 'investor' : seq?.entityType === 'CUSTOMER' ? 'customer' : 'partner'}(s). ${skipped} already enrolled.`);
     },
     onError: (e: Error) => { setEnrollSuccess(''); setEnrollError(e.message); },
   });

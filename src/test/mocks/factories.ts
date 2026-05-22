@@ -1,4 +1,4 @@
-import type { Investor, Partner, EmailLog, Sequence, Material } from '@/types/models';
+import type { Investor, Partner, Customer, EmailLog, Sequence, Material } from '@/types/models';
 
 export const mockUser = {
   id: 'user-1',
@@ -74,6 +74,32 @@ export const mockPartners: Partner[] = [
     tags: [],
     createdAt: '2024-01-03T00:00:00Z',
     updatedAt: '2024-01-04T00:00:00Z',
+  },
+];
+
+export const mockCustomers: Customer[] = [
+  {
+    id: 'cust-1',
+    firstName: 'Nina',
+    lastName: 'Brooks',
+    email: 'nina@customer.com',
+    company: 'BrooksCo',
+    stage: 'LEAD',
+    tags: ['enterprise'],
+    createdAt: '2024-02-01T00:00:00Z',
+    updatedAt: '2024-02-02T00:00:00Z',
+    _count: { emailLogs: 1, activities: 2 },
+  },
+  {
+    id: 'cust-2',
+    firstName: 'Oscar',
+    lastName: 'Webb',
+    email: 'oscar@customer.com',
+    company: 'Webb Inc',
+    stage: 'QUALIFIED',
+    tags: [],
+    createdAt: '2024-02-03T00:00:00Z',
+    updatedAt: '2024-02-04T00:00:00Z',
   },
 ];
 

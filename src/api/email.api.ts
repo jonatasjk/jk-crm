@@ -11,7 +11,7 @@ export interface SendEmailPayload {
 }
 
 export interface EmailLogEntry extends EmailLog {
-  entityType: 'INVESTOR' | 'PARTNER';
+  entityType: 'INVESTOR' | 'PARTNER' | 'CUSTOMER';
   entityId: string;
   recipientName: string;
   recipientEmail: string;
