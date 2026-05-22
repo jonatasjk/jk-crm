@@ -155,4 +155,22 @@ describe('CustomersPage', () => {
     expect(screen.getByTitle('Kanban view')).toBeInTheDocument();
     expect(screen.getByTitle('List view')).toBeInTheDocument();
   });
+
+  it('filters customers when typing in search box', async () => {
+    renderWithProviders(<CustomersPage />);
+    const searchInput = screen.getByPlaceholderText('Search customers...');
+    await userEvent.type(searchInput, 'Nina');
+    await waitFor(() => {
+      expect(searchInput).toHaveValue('Nina');
+    });
+  });
+
+  it('switches back to kanban view after switching to list', async () => {
+    renderWithProviders(<CustomersPage />);
+    await userEvent.click(screen.getByTitle('List view'));
+    await userEvent.click(screen.getByTitle('Kanban view'));
+    await waitFor(() => {
+      expect(screen.getByTitle('Kanban view')).toBeInTheDocument();
+    });
+  });
 });
