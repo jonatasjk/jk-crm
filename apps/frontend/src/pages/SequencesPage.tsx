@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Users, Handshake, Play, Pause, FileEdit, Trash2, Mail } from 'lucide-react';
+import { Plus, Users, Handshake, ShoppingBag, Play, Pause, FileEdit, Trash2, Mail } from 'lucide-react';
 import { sequencesApi, type CreateSequencePayload } from '@/api/sequences.api';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
@@ -94,9 +94,11 @@ export function SequencesPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <Badge variant={STATUS_VARIANT[seq.status]}>{seq.status}</Badge>
-                    <Badge variant={seq.entityType === 'INVESTOR' ? 'info' : 'purple'}>
+                    <Badge variant={seq.entityType === 'INVESTOR' ? 'info' : seq.entityType === 'CUSTOMER' ? 'success' : 'purple'}>
                       {seq.entityType === 'INVESTOR' ? (
                         <><Users size={10} className="inline mr-1" />Investors</>
+                      ) : seq.entityType === 'CUSTOMER' ? (
+                        <><ShoppingBag size={10} className="inline mr-1" />Customers</>
                       ) : (
                         <><Handshake size={10} className="inline mr-1" />Partners</>
                       )}
@@ -169,8 +171,8 @@ export function SequencesPage() {
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Target audience</label>
-            <div className="flex gap-2">
-              {(['INVESTOR', 'PARTNER'] as EntityType[]).map((t) => (
+            <div className="flex flex-col gap-2">
+              {(['INVESTOR', 'PARTNER', 'CUSTOMER'] as EntityType[]).map((t) => (
                 <button
                   key={t}
                   onClick={() => setForm({ ...form, entityType: t })}
@@ -180,7 +182,7 @@ export function SequencesPage() {
                       : 'border-gray-300 text-gray-600 hover:border-indigo-400'
                   }`}
                 >
-                  {t === 'INVESTOR' ? '👥 Investors' : '🤝 Partners'}
+                  {t === 'INVESTOR' ? '👥 Investors' : t === 'CUSTOMER' ? '🛍️ Customers' : '🤝 Partners'}
                 </button>
               ))}
             </div>

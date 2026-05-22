@@ -15,7 +15,16 @@ export type PartnerStage =
   | 'ACTIVE'
   | 'INACTIVE';
 
-export type EntityType = 'INVESTOR' | 'PARTNER';
+export type CustomerStage =
+  | 'LEAD'
+  | 'QUALIFIED'
+  | 'PROPOSAL'
+  | 'NEGOTIATION'
+  | 'CLOSED_WON'
+  | 'CLOSED_LOST'
+  | 'CHURNED';
+
+export type EntityType = 'INVESTOR' | 'PARTNER' | 'CUSTOMER';
 export type EmailStatus = 'PENDING' | 'SENT' | 'FAILED';
 
 export const INVESTOR_STAGES: InvestorStage[] = [
@@ -54,4 +63,24 @@ export const PARTNER_STAGE_LABELS: Record<PartnerStage, string> = {
   NEGOTIATION: 'Negotiation',
   ACTIVE: 'Active',
   INACTIVE: 'Inactive',
+};
+
+export const CUSTOMER_STAGES: CustomerStage[] = [
+  'LEAD',
+  'QUALIFIED',
+  'PROPOSAL',
+  'NEGOTIATION',
+  'CLOSED_WON',
+  'CLOSED_LOST',
+  'CHURNED',
+];
+
+export const CUSTOMER_STAGE_LABELS: Record<CustomerStage, string> = {
+  LEAD: 'Lead',
+  QUALIFIED: 'Qualified',
+  PROPOSAL: 'Proposal Sent',
+  NEGOTIATION: 'Negotiation',
+  CLOSED_WON: 'Closed / Won',
+  CLOSED_LOST: 'Closed / Lost',
+  CHURNED: 'Churned',
 };

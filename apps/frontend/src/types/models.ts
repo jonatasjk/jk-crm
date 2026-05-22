@@ -1,4 +1,4 @@
-import type { InvestorStage, PartnerStage, EntityType, EmailStatus } from './enums';
+import type { InvestorStage, PartnerStage, CustomerStage, EntityType, EmailStatus } from './enums';
 
 export interface Investor {
   id: string;
@@ -27,6 +27,23 @@ export interface Partner {
   website?: string;
   linkedinUrl?: string;
   stage: PartnerStage;
+  notes?: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+  _count?: { emailLogs: number; activities: number };
+}
+
+export interface Customer {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  website?: string;
+  linkedinUrl?: string;
+  stage: CustomerStage;
   notes?: string;
   tags: string[];
   createdAt: string;

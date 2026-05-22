@@ -2,14 +2,14 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Building2, Mail } from 'lucide-react';
 import { cn } from '@/utils';
-import type { Investor, Partner } from '@/types/models';
+import type { Investor, Partner, Customer } from '@/types/models';
 import { Badge } from '@/components/ui/Badge';
 
-type Entity = Investor | Partner;
+type Entity = Investor | Partner | Customer;
 
 interface KanbanCardProps {
   entity: Entity;
-  entityType: 'investor' | 'partner';
+  entityType: 'investor' | 'partner' | 'customer';
   onClick: () => void;
   isDragging?: boolean;
 }

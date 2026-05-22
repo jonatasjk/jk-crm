@@ -1,17 +1,17 @@
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { KanbanCard } from './KanbanCard';
-import type { Investor, Partner } from '@/types/models';
+import type { Investor, Partner, Customer } from '@/types/models';
 import { cn } from '@/utils';
 
-type Entity = Investor | Partner;
+type Entity = Investor | Partner | Customer;
 
 interface KanbanColumnProps {
   stage: string;
   label: string;
   items: Entity[];
   onCardClick: (entity: Entity) => void;
-  entityType: 'investor' | 'partner';
+  entityType: 'investor' | 'partner' | 'customer';
 }
 
 export function KanbanColumn({ stage, label, items, onCardClick, entityType }: KanbanColumnProps) {
