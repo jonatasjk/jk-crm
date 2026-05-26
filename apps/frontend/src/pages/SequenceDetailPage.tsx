@@ -223,18 +223,22 @@ export function SequenceDetailPage() {
 
   const saveStep = () => {
     if (!stepModal.draft.subject.trim()) return;
-    setLocalSteps((prev) => {
-      const steps = [...prev];
-      const step = { ...stepModal.draft, order: 0 } as SequenceStep;
+    const step = { ...stepModal.draft, order: 0 } as SequenceStep;
+    const nextSteps = (() => {
+      const steps = [...localSteps];
       if (stepModal.idx === null) {
         steps.push(step);
       } else {
         steps[stepModal.idx] = step;
       }
       return steps;
-    });
-    setStepsDirty(true);
+    })();
+    setLocalSteps(nextSteps);
     setStepModal({ open: false, idx: null, draft: { ...EMPTY_STEP } });
+    updateMutation.mutate(
+      { steps: nextSteps.map((s, i) => ({ ...s, order: i + 1 })) },
+      { onSuccess: () => setStepsDirty(false) },
+    );
   };
 
   // ── info save ──────────────────────────────────────────────────────────────
@@ -604,6 +608,7 @@ export function SequenceDetailPage() {
               className="flex-1"
               onClick={saveStep}
               disabled={!stepModal.draft.subject.trim()}
+              loading={updateMutation.isPending}
             >
               {stepModal.idx === null ? 'Add Step' : 'Save Step'}
             </Button>
