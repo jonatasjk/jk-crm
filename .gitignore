@@ -1,0 +1,12 @@
+# Root-level env file used by docker-compose.yml
+.env
+.env.*
+!.env.example
+
+# OS / editor cruft (apps/* have their own, more specific .gitignore)
+**/.DS_Store
+.vscode/
+.idea/
+
+# Safety net if anything is ever installed at the repo root
+node_modules/
