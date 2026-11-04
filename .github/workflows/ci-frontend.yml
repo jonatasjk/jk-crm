@@ -1,15 +1,24 @@
-name: CI
+name: CI (frontend)
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'apps/frontend/**'
+      - '.github/workflows/ci-frontend.yml'
   pull_request:
     branches: [main]
+    paths:
+      - 'apps/frontend/**'
+      - '.github/workflows/ci-frontend.yml'
 
 jobs:
   test:
     name: Test & Coverage
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/frontend
 
     steps:
       - name: Checkout
@@ -20,6 +29,7 @@ jobs:
         with:
           node-version: '24'
           cache: 'npm'
+          cache-dependency-path: apps/frontend/package-lock.json
 
       - name: Update npm
         run: npm install -g npm@11
@@ -43,14 +53,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: coverage/
+          name: coverage-report-frontend
+          path: apps/frontend/coverage/
           if-no-files-found: warn
 
       - name: Upload logs on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ci-logs
-          path: '*.log'
+          name: ci-logs-frontend
+          path: apps/frontend/*.log
           if-no-files-found: warn
