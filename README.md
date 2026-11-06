@@ -1,4 +1,4 @@
-# JK CRM - Frontend
+# JK CRM
 
 <p align="center">
   <img src="apps/frontend/public/chief-delivery-officer.png" alt="Chief Delivery Officer" width="160" />
@@ -71,6 +71,29 @@ npm run build
 ```
 
 Output goes to `dist/`. The included `nginx.conf` and `Dockerfile` are ready for containerised deployment.
+
+### Run with Docker
+
+The repo root has a unified `Dockerfile` (frontend + api targets) and a `docker-compose.yml` that runs the frontend, the API, and MongoDB together.
+
+1. Copy `.env.example` to `.env` at the repo root and fill in the values (`JWT_SECRET`, `SEED_ADMIN_PASSWORD`, Resend keys, etc.).
+2. From the repo root:
+
+   ```bash
+   docker compose up --build
+   ```
+
+3. Services:
+   - Frontend → `http://localhost:8080`
+   - API → proxied by the frontend container at `/api/v1`, internal port `3001`
+   - MongoDB → `localhost:27017`, data persisted in the `mongo-data` volume
+
+To build/run a single image directly instead of compose:
+
+```bash
+docker build --target frontend -t jk-crm-frontend .
+docker build --target api      -t jk-crm-api .
+```
 
 ## Project Structure
 
