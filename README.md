@@ -1,7 +1,7 @@
 # JK CRM - Frontend
 
 <p align="center">
-  <img src="public/chief-delivery-officer.png" alt="Chief Delivery Officer" width="160" />
+  <img src="apps/frontend/public/chief-delivery-officer.png" alt="Chief Delivery Officer" width="160" />
 </p>
 
 <p align="center">
@@ -44,11 +44,12 @@ A modern CRM for managing **Investors** and **Partners**, featuring Kanban pipel
 ### Prerequisites
 
 - Node.js 20 LTS
-- The `crm-backend` API running. See [JK CRM - Backend](https://github.com/jonatasjk/jk-crm-backend)
+- The API running. See [apps/api/README.md](apps/api/README.md)
 
 ### Install & run
 
 ```bash
+cd apps/frontend
 npm install
 npm run dev
 ```
@@ -57,7 +58,7 @@ The app starts at `http://localhost:5173` by default.
 
 ### Environment
 
-Create a `.env` file at the project root:
+Create a `.env` file in `apps/frontend/`:
 
 ```env
 VITE_API_URL=http://localhost:3000/api/v1
@@ -74,13 +75,16 @@ Output goes to `dist/`. The included `nginx.conf` and `Dockerfile` are ready for
 ## Project Structure
 
 ```
-src/
-  api/          # Axios API clients (auth, investors, partners, email, sequences, materials)
-  components/   # Feature components (email, investors, partners, materials, sequences, shared UI)
-  pages/        # Route-level page components
-  store/        # Zustand stores (auth)
-  types/        # TypeScript models and enums
-  utils/        # Shared helpers
+apps/
+  frontend/     # This app (React + Vite)
+    src/
+      api/          # Axios API clients (auth, investors, partners, email, sequences, materials)
+      components/   # Feature components (email, investors, partners, materials, sequences, shared UI)
+      pages/        # Route-level page components
+      store/        # Zustand stores (auth)
+      types/        # TypeScript models and enums
+      utils/        # Shared helpers
+  api/          # Backend API — see apps/api/README.md
 ```
 
 ## Scripts
@@ -94,4 +98,4 @@ src/
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](apps/frontend/LICENSE).
